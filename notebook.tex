@@ -1,0 +1,1489 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Bike\_Share\_Analysis}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{us-bike-share-activity-snapshot}{%
+\section{2016 US Bike Share Activity
+Snapshot}\label{us-bike-share-activity-snapshot}}
+
+\hypertarget{table-of-contents}{%
+\subsection{Table of Contents}\label{table-of-contents}}
+
+\begin{itemize}
+\tightlist
+\item
+  Section \ref{intro}
+\item
+  Section \ref{pose_questions}
+\item
+  Section \ref{wrangling}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Section \ref{condensing}
+  \end{itemize}
+\item
+  Section \ref{eda}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Section \ref{statistics}
+  \item
+    Section \ref{visualizations}
+  \end{itemize}
+\item
+  Section \ref{eda_continued}
+\item
+  Section \ref{conclusions}
+\end{itemize}
+
+ \#\# Introduction
+
+\begin{quote}
+\textbf{Tip}: Quoted sections like this will provide helpful
+instructions on how to navigate and use a Jupyter notebook.
+\end{quote}
+
+Over the past decade, bicycle-sharing systems have been growing in
+number and popularity in cities across the world. Bicycle-sharing
+systems allow users to rent bicycles for short trips, typically 30
+minutes or less. Thanks to the rise in information technologies, it is
+easy for a user of the system to access a dock within the system to
+unlock or return bicycles. These technologies also provide a wealth of
+data that can be used to explore how these bike-sharing systems are
+used.
+
+In this project, you will perform an exploratory analysis on data
+provided by \href{https://www.motivateco.com/}{Motivate}, a bike-share
+system provider for many major cities in the United States. You will
+compare the system usage between three large cities: New York City,
+Chicago, and Washington, DC. You will also see if there are any
+differences within each system for those users that are registered,
+regular users and those users that are short-term, casual users.
+
+     \#\# Posing Questions
+
+Before looking at the bike sharing data, you should start by asking
+questions you might want to understand about the bike share data.
+Consider, for example, if you were working for Motivate. What kinds of
+information would you want to know about in order to make smarter
+business decisions? If you were a user of the bike-share service, what
+factors might influence how you would want to use the service?
+
+\textbf{Question 1}: Write at least two questions related to bike
+sharing that you think could be answered by data.
+
+\textbf{Answer}: How many users are using this service? What is growth
+in each month? Which city having maximum users?
+
+\begin{quote}
+\textbf{Tip}: If you double click on this cell, you will see the text
+change so that all of the formatting is removed. This allows you to edit
+this block of text. This block of text is written using
+\href{http://daringfireball.net/projects/markdown/syntax}{Markdown},
+which is a way to format text using headers, links, italics, and many
+other options using a plain-text syntax. You will also use Markdown
+later in the Nanodegree program. Use \textbf{Shift} + \textbf{Enter} or
+\textbf{Shift} + \textbf{Return} to run the cell and show its rendered
+form.
+\end{quote}
+
+     \#\# Data Collection and Wrangling
+
+Now it's time to collect and explore our data. In this project, we will
+focus on the record of individual trips taken in 2016 from our selected
+cities: New York City, Chicago, and Washington, DC. Each of these cities
+has a page where we can freely download the trip data.:
+
+\begin{itemize}
+\tightlist
+\item
+  New York City (Citi Bike):
+  \href{https://www.citibikenyc.com/system-data}{Link}
+\item
+  Chicago (Divvy): \href{https://www.divvybikes.com/system-data}{Link}
+\item
+  Washington, DC (Capital Bikeshare):
+  \href{https://www.capitalbikeshare.com/system-data}{Link}
+\end{itemize}
+
+If you visit these pages, you will notice that each city has a different
+way of delivering its data. Chicago updates with new data twice a year,
+Washington DC is quarterly, and New York City is monthly.
+\textbf{However, you do not need to download the data yourself.} The
+data has already been collected for you in the \texttt{/data/} folder of
+the project files. While the original data for 2016 is spread among
+multiple files for each city, the files in the \texttt{/data/} folder
+collect all of the trip data for the year into one file per city. Some
+data wrangling of inconsistencies in timestamp format within each city
+has already been performed for you. In addition, a random 2\% sample of
+the original data is taken to make the exploration more manageable.
+
+\textbf{Question 2}: However, there is still a lot of data for us to
+investigate, so it's a good idea to start off by looking at one entry
+from each of the cities we're going to analyze. Run the first code cell
+below to load some packages and functions that you'll be using in your
+analysis. Then, complete the second code cell to print out the first
+trip recorded from each of the cities (the second line of each data
+file).
+
+\begin{quote}
+\textbf{Tip}: You can run a code cell like you formatted Markdown cells
+above by clicking on the cell and using the keyboard shortcut
+\textbf{Shift} + \textbf{Enter} or \textbf{Shift} + \textbf{Return}.
+Alternatively, a code cell can be executed using the \textbf{Play}
+button in the toolbar after selecting it. While the cell is running, you
+will see an asterisk in the message to the left of the cell, i.e.
+\texttt{In\ {[}*{]}:}. The asterisk will change into a number to show
+that execution has completed, e.g. \texttt{In\ {[}1{]}}. If there is
+output, it will show up as \texttt{Out\ {[}1{]}:}, with an appropriate
+number to match the ``In'' number.
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} import all necessary packages and functions.}
+        \PY{k+kn}{import} \PY{n+nn}{csv} \PY{c+c1}{\PYZsh{} read and write csv files}
+        \PY{k+kn}{from} \PY{n+nn}{datetime} \PY{k}{import} \PY{n}{datetime} \PY{c+c1}{\PYZsh{} operations to parse dates}
+        \PY{k+kn}{from} \PY{n+nn}{pprint} \PY{k}{import} \PY{n}{pprint} \PY{c+c1}{\PYZsh{} use to print data structures like dictionaries in}
+        \PY{k+kn}{import} \PY{n+nn}{time}                      \PY{c+c1}{\PYZsh{} a nicer way than the base print function.}
+        \PY{k+kn}{import} \PY{n+nn}{calendar}
+        
+        \PY{k}{def} \PY{n+nf}{print\PYZus{}first\PYZus{}point}\PY{p}{(}\PY{n}{filename}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    This function prints and returns the first data point (second row) from}
+        \PY{l+s+sd}{    a csv file that includes a header row.}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{c+c1}{\PYZsh{} print city name for reference}
+            \PY{n}{city} \PY{o}{=} \PY{n}{filename}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{City: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{city}\PY{p}{)}\PY{p}{)}
+            
+            \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{filename}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f\PYZus{}in}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{}\PYZsh{} TODO: Use the csv library to set up a DictReader object. \PYZsh{}\PYZsh{}}
+                \PY{c+c1}{\PYZsh{}\PYZsh{} see https://docs.python.org/3/library/csv.html           \PYZsh{}\PYZsh{}}
+                \PY{n}{trip\PYZus{}reader} \PY{o}{=} \PY{n}{csv}\PY{o}{.}\PY{n}{DictReader}\PY{p}{(}\PY{n}{f\PYZus{}in}\PY{p}{)}
+                
+                \PY{c+c1}{\PYZsh{}\PYZsh{} TODO: Use a function on the DictReader object to read the     \PYZsh{}\PYZsh{}}
+                \PY{c+c1}{\PYZsh{}\PYZsh{} first trip from the data file and store it in a variable.     \PYZsh{}\PYZsh{}}
+                \PY{c+c1}{\PYZsh{}\PYZsh{} see https://docs.python.org/3/library/csv.html\PYZsh{}reader\PYZhy{}objects \PYZsh{}\PYZsh{}}
+                \PY{n}{first\PYZus{}trip} \PY{o}{=} \PY{n+nb}{next}\PY{p}{(}\PY{n}{trip\PYZus{}reader}\PY{p}{)}
+                
+                \PY{c+c1}{\PYZsh{}\PYZsh{} TODO: Use the pprint library to print the first trip. \PYZsh{}\PYZsh{}}
+                \PY{c+c1}{\PYZsh{}\PYZsh{} see https://docs.python.org/3/library/pprint.html     \PYZsh{}\PYZsh{}}
+                \PY{n}{pprint}\PY{p}{(}\PY{n}{first\PYZus{}trip}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} output city name and first trip for later testing}
+            \PY{k}{return} \PY{p}{(}\PY{n}{city}\PY{p}{,} \PY{n}{first\PYZus{}trip}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} list of files for each city}
+        \PY{n}{data\PYZus{}files} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./data/NYC\PYZhy{}CitiBike\PYZhy{}2016.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./data/Chicago\PYZhy{}Divvy\PYZhy{}2016.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./data/Washington\PYZhy{}CapitalBikeshare\PYZhy{}2016.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} print the first trip from each file, store in dictionary}
+        \PY{n}{example\PYZus{}trips} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+        \PY{k}{for} \PY{n}{data\PYZus{}file} \PY{o+ow}{in} \PY{n}{data\PYZus{}files}\PY{p}{:}
+            \PY{n}{city}\PY{p}{,} \PY{n}{first\PYZus{}trip} \PY{o}{=} \PY{n}{print\PYZus{}first\PYZus{}point}\PY{p}{(}\PY{n}{data\PYZus{}file}\PY{p}{)}
+            \PY{n}{example\PYZus{}trips}\PY{p}{[}\PY{n}{city}\PY{p}{]} \PY{o}{=} \PY{n}{first\PYZus{}trip}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+City: NYC
+OrderedDict([('tripduration', '839'),
+             ('starttime', '1/1/2016 00:09:55'),
+             ('stoptime', '1/1/2016 00:23:54'),
+             ('start station id', '532'),
+             ('start station name', 'S 5 Pl \& S 4 St'),
+             ('start station latitude', '40.710451'),
+             ('start station longitude', '-73.960876'),
+             ('end station id', '401'),
+             ('end station name', 'Allen St \& Rivington St'),
+             ('end station latitude', '40.72019576'),
+             ('end station longitude', '-73.98997825'),
+             ('bikeid', '17109'),
+             ('usertype', 'Customer'),
+             ('birth year', ''),
+             ('gender', '0')])
+
+City: Chicago
+OrderedDict([('trip\_id', '9080545'),
+             ('starttime', '3/31/2016 23:30'),
+             ('stoptime', '3/31/2016 23:46'),
+             ('bikeid', '2295'),
+             ('tripduration', '926'),
+             ('from\_station\_id', '156'),
+             ('from\_station\_name', 'Clark St \& Wellington Ave'),
+             ('to\_station\_id', '166'),
+             ('to\_station\_name', 'Ashland Ave \& Wrightwood Ave'),
+             ('usertype', 'Subscriber'),
+             ('gender', 'Male'),
+             ('birthyear', '1990')])
+
+City: Washington
+OrderedDict([('Duration (ms)', '427387'),
+             ('Start date', '3/31/2016 22:57'),
+             ('End date', '3/31/2016 23:04'),
+             ('Start station number', '31602'),
+             ('Start station', 'Park Rd \& Holmead Pl NW'),
+             ('End station number', '31207'),
+             ('End station', 'Georgia Ave and Fairmont St NW'),
+             ('Bike number', 'W20842'),
+             ('Member Type', 'Registered')])
+
+    \end{Verbatim}
+
+    If everything has been filled out correctly, you should see below the
+printout of each city name (which has been parsed from the data file
+name) that the first trip has been parsed in the form of a dictionary.
+When you set up a \texttt{DictReader} object, the first row of the data
+file is normally interpreted as column names. Every other row in the
+data file will use those column names as keys, as a dictionary is
+generated for each row.
+
+This will be useful since we can refer to quantities by an
+easily-understandable label instead of just a numeric index. For
+example, if we have a trip stored in the variable \texttt{row}, then we
+would rather get the trip duration from
+\texttt{row{[}\textquotesingle{}duration\textquotesingle{}{]}} instead
+of \texttt{row{[}0{]}}.
+
+ \#\#\# Condensing the Trip Data
+
+It should also be observable from the above printout that each city
+provides different information. Even where the information is the same,
+the column names and formats are sometimes different. To make things as
+simple as possible when we get to the actual exploration, we should trim
+and clean the data. Cleaning the data makes sure that the data formats
+across the cities are consistent, while trimming focuses only on the
+parts of the data we are most interested in to make the exploration
+easier to work with.
+
+You will generate new data files with five values of interest for each
+trip: trip duration, starting month, starting hour, day of the week, and
+user type. Each of these may require additional wrangling depending on
+the city:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Duration}: This has been given to us in seconds (New York,
+  Chicago) or milliseconds (Washington). A more natural unit of analysis
+  will be if all the trip durations are given in terms of minutes.
+\item
+  \textbf{Month}, \textbf{Hour}, \textbf{Day of Week}: Ridership volume
+  is likely to change based on the season, time of day, and whether it
+  is a weekday or weekend. Use the start time of the trip to obtain
+  these values. The New York City data includes the seconds in their
+  timestamps, while Washington and Chicago do not. The
+  \href{https://docs.python.org/3/library/datetime.html}{\texttt{datetime}}
+  package will be very useful here to make the needed conversions.
+\item
+  \textbf{User Type}: It is possible that users who are subscribed to a
+  bike-share system will have different patterns of use compared to
+  users who only have temporary passes. Washington divides its users
+  into two types: `Registered' for users with annual, monthly, and other
+  longer-term subscriptions, and `Casual', for users with 24-hour,
+  3-day, and other short-term passes. The New York and Chicago data uses
+  `Subscriber' and `Customer' for these groups, respectively. For
+  consistency, you will convert the Washington labels to match the other
+  two.
+\end{itemize}
+
+\textbf{Question 3a}: Complete the helper functions in the code cells
+below to address each of the cleaning tasks described above.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{k}{def} \PY{n+nf}{duration\PYZus{}in\PYZus{}mins}\PY{p}{(}\PY{n}{datum}\PY{p}{,} \PY{n}{city}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Takes as input a dictionary containing info about a single trip (datum) and}
+         \PY{l+s+sd}{    its origin city (city) and returns the trip duration in units of minutes.}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Remember that Washington is in terms of milliseconds while Chicago and NYC}
+         \PY{l+s+sd}{    are in terms of seconds. }
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    HINT: The csv module reads in all of the data as strings, including numeric}
+         \PY{l+s+sd}{    values. You will need a function to convert the strings into an appropriate}
+         \PY{l+s+sd}{    numeric type when making your transformations.}
+         \PY{l+s+sd}{    see https://docs.python.org/3/library/functions.html}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             
+             \PY{c+c1}{\PYZsh{} YOUR CODE HERE}
+             \PY{c+c1}{\PYZsh{}print(\PYZdq{}City is \PYZob{}\PYZcb{}\PYZdq{}.format(city))}
+             \PY{k}{if} \PY{p}{(}\PY{n}{city} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Washington}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{millis} \PY{o}{=} \PY{n}{datum}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Duration (ms)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                 \PY{n}{minutes}\PY{o}{=}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{millis}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{1000}\PY{o}{*}\PY{l+m+mi}{60}\PY{p}{)}\PY{p}{)}\PY{o}{\PYZpc{}}\PY{k}{60}
+                 \PY{n}{duration} \PY{o}{=} \PY{n}{minutes}
+                 \PY{k}{return} \PY{n}{duration}
+                 \PY{c+c1}{\PYZsh{}print(minutes)}
+             \PY{k}{elif} \PY{p}{(}\PY{n}{city} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NYC}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{time\PYZus{}duration} \PY{o}{=} \PY{n}{datum}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tripduration}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                  \PY{n}{minutes} \PY{o}{=}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{time\PYZus{}duration}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{60}\PY{p}{)}\PY{o}{\PYZpc{}}\PY{k}{60}
+                  \PY{n}{duration} \PY{o}{=} \PY{n}{minutes}
+                  \PY{k}{return} \PY{n}{duration}
+                  \PY{c+c1}{\PYZsh{}print(minutes)}
+             \PY{k}{elif} \PY{p}{(}\PY{n}{city} \PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Chicago}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{time\PYZus{}duration} \PY{o}{=} \PY{n}{datum}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tripduration}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                 \PY{n}{minutes}\PY{o}{=}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{time\PYZus{}duration}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{60}\PY{p}{)}\PY{o}{\PYZpc{}}\PY{k}{60}
+                 \PY{n}{duration} \PY{o}{=} \PY{n}{minutes}
+                 \PY{c+c1}{\PYZsh{}print(minutes)}
+                 \PY{k}{return} \PY{n}{duration}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{something wrong}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{}duration = False}
+                 
+         
+         \PY{c+c1}{\PYZsh{} Some tests to check that your code works. There should be no output if all of}
+         \PY{c+c1}{\PYZsh{} the assertions pass. The `example\PYZus{}trips` dictionary was obtained from when}
+         \PY{c+c1}{\PYZsh{} you printed the first trip from each of the original data files.}
+         \PY{n}{tests} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NYC}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mf}{13.9833}\PY{p}{,}
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Chicago}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mf}{15.4333}\PY{p}{,}
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Washington}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mf}{7.1231}\PY{p}{\PYZcb{}}
+         
+         \PY{k}{for} \PY{n}{city} \PY{o+ow}{in} \PY{n}{tests}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}print(abs(duration\PYZus{}in\PYZus{}mins(example\PYZus{}trips[city], city)))}
+             \PY{k}{assert} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{duration\PYZus{}in\PYZus{}mins}\PY{p}{(}\PY{n}{example\PYZus{}trips}\PY{p}{[}\PY{n}{city}\PY{p}{]}\PY{p}{,} \PY{n}{city}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{tests}\PY{p}{[}\PY{n}{city}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{o}{.}\PY{l+m+mi}{001}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{k}{def} \PY{n+nf}{time\PYZus{}of\PYZus{}trip}\PY{p}{(}\PY{n}{datum}\PY{p}{,} \PY{n}{city}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Takes as input a dictionary containing info about a single trip (datum) and}
+         \PY{l+s+sd}{    its origin city (city) and returns the month, hour, and day of the week in}
+         \PY{l+s+sd}{    which the trip was made.}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Remember that NYC includes seconds, while Washington and Chicago do not.}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    HINT: You should use the datetime module to parse the original date}
+         \PY{l+s+sd}{    strings into a format that is useful for extracting the desired information.}
+         \PY{l+s+sd}{    see https://docs.python.org/3/library/datetime.html\PYZsh{}strftime\PYZhy{}and\PYZhy{}strptime\PYZhy{}behavior}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             
+             \PY{c+c1}{\PYZsh{} YOUR CODE HERE}
+             \PY{n}{fmt\PYZus{}NYC} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{m/}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{/}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{Y }\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{H:}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{M:}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{S}\PY{l+s+s1}{\PYZsq{}}
+             \PY{n}{fmt\PYZus{}Chicago} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{m/}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{/}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{Y }\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{H:}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{M}\PY{l+s+s1}{\PYZsq{}}
+             \PY{c+c1}{\PYZsh{}print(\PYZdq{}City is \PYZob{}\PYZcb{}\PYZdq{}.format(city))}
+             \PY{k}{if} \PY{p}{(}\PY{n}{city} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Washington}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{starttime} \PY{o}{=} \PY{n}{datum}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Start date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                 \PY{n}{start}\PY{o}{=} \PY{n}{datetime}\PY{o}{.}\PY{n}{strptime}\PY{p}{(}\PY{n}{starttime}\PY{p}{,} \PY{n}{fmt\PYZus{}Chicago}\PY{p}{)}
+                 \PY{n}{month} \PY{o}{=} \PY{n}{start}\PY{o}{.}\PY{n}{month}
+                 \PY{c+c1}{\PYZsh{}month = format(month\PYZus{},\PYZsq{}02d\PYZsq{})}
+                 \PY{n}{hour} \PY{o}{=} \PY{n}{start}\PY{o}{.}\PY{n}{hour}
+                 \PY{c+c1}{\PYZsh{}hour = format(hour\PYZus{},\PYZsq{}02d\PYZsq{})}
+                 \PY{n}{day\PYZus{}of\PYZus{}week} \PY{o}{=} \PY{n}{calendar}\PY{o}{.}\PY{n}{day\PYZus{}name}\PY{p}{[}\PY{n}{start}\PY{o}{.}\PY{n}{weekday}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+         
+             \PY{k}{elif} \PY{p}{(}\PY{n}{city} \PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NYC}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{starttime} \PY{o}{=} \PY{n}{datum}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{starttime}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                 \PY{n}{start}\PY{o}{=} \PY{n}{datetime}\PY{o}{.}\PY{n}{strptime}\PY{p}{(}\PY{n}{starttime}\PY{p}{,} \PY{n}{fmt\PYZus{}NYC}\PY{p}{)}
+                 \PY{n}{month} \PY{o}{=} \PY{n}{start}\PY{o}{.}\PY{n}{month}
+                 \PY{c+c1}{\PYZsh{}month = format(month\PYZus{},\PYZsq{}02d\PYZsq{})}
+                 \PY{n}{hour} \PY{o}{=} \PY{n}{start}\PY{o}{.}\PY{n}{hour}
+                 \PY{c+c1}{\PYZsh{}hour = format(hour\PYZus{},\PYZsq{}02d\PYZsq{})}
+                 \PY{n}{day\PYZus{}of\PYZus{}week} \PY{o}{=} \PY{n}{calendar}\PY{o}{.}\PY{n}{day\PYZus{}name}\PY{p}{[}\PY{n}{start}\PY{o}{.}\PY{n}{weekday}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+         
+             \PY{k}{elif} \PY{p}{(}\PY{n}{city} \PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Chicago}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{starttime} \PY{o}{=} \PY{n}{datum}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{starttime}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                 \PY{n}{start}\PY{o}{=} \PY{n}{datetime}\PY{o}{.}\PY{n}{strptime}\PY{p}{(}\PY{n}{starttime}\PY{p}{,} \PY{n}{fmt\PYZus{}Chicago}\PY{p}{)}
+                 \PY{n}{month} \PY{o}{=} \PY{n}{start}\PY{o}{.}\PY{n}{month}
+                 \PY{c+c1}{\PYZsh{}month = format(month\PYZus{},\PYZsq{}02d\PYZsq{})}
+                 \PY{n}{hour} \PY{o}{=} \PY{n}{start}\PY{o}{.}\PY{n}{hour}
+                 \PY{c+c1}{\PYZsh{}hour = format(hour\PYZus{},\PYZsq{}02d\PYZsq{})}
+                 \PY{n}{day\PYZus{}of\PYZus{}week} \PY{o}{=} \PY{n}{calendar}\PY{o}{.}\PY{n}{day\PYZus{}name}\PY{p}{[}\PY{n}{start}\PY{o}{.}\PY{n}{weekday}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+         
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Something is wrong. Please check input}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{k}{return} \PY{k+kc}{False}
+             
+             \PY{k}{return} \PY{p}{(}\PY{n}{month}\PY{p}{,} \PY{n}{hour}\PY{p}{,} \PY{n}{day\PYZus{}of\PYZus{}week}\PY{p}{)}
+         
+         
+         \PY{c+c1}{\PYZsh{} Some tests to check that your code works. There should be no output if all of}
+         \PY{c+c1}{\PYZsh{} the assertions pass. The `example\PYZus{}trips` dictionary was obtained from when}
+         \PY{c+c1}{\PYZsh{} you printed the first trip from each of the original data files.}
+         \PY{n}{tests} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NYC}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Friday}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Chicago}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{23}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Thursday}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Washington}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{22}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Thursday}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{\PYZcb{}}
+         
+         \PY{k}{for} \PY{n}{city} \PY{o+ow}{in} \PY{n}{tests}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}print(time\PYZus{}of\PYZus{}trip(example\PYZus{}trips[city], city))}
+             \PY{k}{assert} \PY{n}{time\PYZus{}of\PYZus{}trip}\PY{p}{(}\PY{n}{example\PYZus{}trips}\PY{p}{[}\PY{n}{city}\PY{p}{]}\PY{p}{,} \PY{n}{city}\PY{p}{)} \PY{o}{==} \PY{n}{tests}\PY{p}{[}\PY{n}{city}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{k}{def} \PY{n+nf}{type\PYZus{}of\PYZus{}user}\PY{p}{(}\PY{n}{datum}\PY{p}{,} \PY{n}{city}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Takes as input a dictionary containing info about a single trip (datum) and}
+         \PY{l+s+sd}{    its origin city (city) and returns the type of system user that made the}
+         \PY{l+s+sd}{    trip.}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Remember that Washington has different category names compared to Chicago}
+         \PY{l+s+sd}{    and NYC. }
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             
+             \PY{c+c1}{\PYZsh{} YOUR CODE HERE}
+             \PY{k}{if} \PY{p}{(}\PY{n}{city} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Washington}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{user\PYZus{}type} \PY{o}{=} \PY{n}{datum}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Member Type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                 \PY{k}{if}\PY{p}{(}\PY{n}{user\PYZus{}type} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Registered}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{user\PYZus{}type} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Subscriber}\PY{l+s+s1}{\PYZsq{}}
+                 \PY{k}{if}\PY{p}{(}\PY{n}{user\PYZus{}type} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Casual}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{user\PYZus{}type} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Customer}\PY{l+s+s1}{\PYZsq{}}
+             \PY{k}{elif} \PY{p}{(}\PY{n}{city} \PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NYC}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{user\PYZus{}type} \PY{o}{=} \PY{n}{datum}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{usertype}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         
+             \PY{k}{elif} \PY{p}{(}\PY{n}{city} \PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Chicago}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{user\PYZus{}type} \PY{o}{=} \PY{n}{datum}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{usertype}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Something is wrong. Please check input}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{k}{return} \PY{k+kc}{False}
+             
+             \PY{k}{return} \PY{n}{user\PYZus{}type}
+         
+         
+         \PY{c+c1}{\PYZsh{} Some tests to check that your code works. There should be no output if all of}
+         \PY{c+c1}{\PYZsh{} the assertions pass. The `example\PYZus{}trips` dictionary was obtained from when}
+         \PY{c+c1}{\PYZsh{} you printed the first trip from each of the original data files.}
+         \PY{n}{tests} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NYC}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Customer}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Chicago}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Subscriber}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Washington}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Subscriber}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}
+         
+         \PY{k}{for} \PY{n}{city} \PY{o+ow}{in} \PY{n}{tests}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}print(type\PYZus{}of\PYZus{}user(example\PYZus{}trips[city], city))}
+             \PY{k}{assert} \PY{n}{type\PYZus{}of\PYZus{}user}\PY{p}{(}\PY{n}{example\PYZus{}trips}\PY{p}{[}\PY{n}{city}\PY{p}{]}\PY{p}{,} \PY{n}{city}\PY{p}{)} \PY{o}{==} \PY{n}{tests}\PY{p}{[}\PY{n}{city}\PY{p}{]}
+\end{Verbatim}
+
+
+    \textbf{Question 3b}: Now, use the helper functions you wrote above to
+create a condensed data file for each city consisting only of the data
+fields indicated above. In the \texttt{/examples/} folder, you will see
+an example datafile from the
+\href{http://www.bayareabikeshare.com/open-data}{Bay Area Bike Share}
+before and after conversion. Make sure that your output is formatted to
+be consistent with the example file.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{k}{def} \PY{n+nf}{condense\PYZus{}data}\PY{p}{(}\PY{n}{in\PYZus{}file}\PY{p}{,} \PY{n}{out\PYZus{}file}\PY{p}{,} \PY{n}{city}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    This function takes full data from the specified input file}
+         \PY{l+s+sd}{    and writes the condensed data to a specified output file. The city}
+         \PY{l+s+sd}{    argument determines how the input file will be parsed.}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    HINT: See the cell below to see how the arguments are structured!}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             
+             \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{out\PYZus{}file}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{newline}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f\PYZus{}out}\PY{p}{,} \PY{n+nb}{open}\PY{p}{(}\PY{n}{in\PYZus{}file}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f\PYZus{}in}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{} set up csv DictWriter object \PYZhy{} writer requires column names for the}
+                 \PY{c+c1}{\PYZsh{} first row as the \PYZdq{}fieldnames\PYZdq{} argument}
+                 \PY{n}{out\PYZus{}colnames} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{duration}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{month}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hour}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{day\PYZus{}of\PYZus{}week}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}        
+                 \PY{n}{trip\PYZus{}writer} \PY{o}{=} \PY{n}{csv}\PY{o}{.}\PY{n}{DictWriter}\PY{p}{(}\PY{n}{f\PYZus{}out}\PY{p}{,} \PY{n}{fieldnames} \PY{o}{=} \PY{n}{out\PYZus{}colnames}\PY{p}{)}
+                 \PY{n}{trip\PYZus{}writer}\PY{o}{.}\PY{n}{writeheader}\PY{p}{(}\PY{p}{)}
+                 
+                 \PY{c+c1}{\PYZsh{}\PYZsh{} TODO: set up csv DictReader object \PYZsh{}\PYZsh{}}
+                 \PY{n}{trip\PYZus{}reader} \PY{o}{=} \PY{n}{csv}\PY{o}{.}\PY{n}{DictReader}\PY{p}{(}\PY{n}{f\PYZus{}in}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} collect data from and process each row}
+                 \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n}{trip\PYZus{}reader}\PY{p}{:}
+                     \PY{c+c1}{\PYZsh{} set up a dictionary to hold the values for the cleaned and trimmed}
+                     \PY{c+c1}{\PYZsh{} data point}
+                     \PY{n}{new\PYZus{}point} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+         
+                     \PY{c+c1}{\PYZsh{}\PYZsh{} TODO: use the helper functions to get the cleaned data from  \PYZsh{}\PYZsh{}}
+                     \PY{c+c1}{\PYZsh{}\PYZsh{} the original data dictionaries.                              \PYZsh{}\PYZsh{}}
+                     \PY{c+c1}{\PYZsh{}\PYZsh{} Note that the keys for the new\PYZus{}point dictionary should match \PYZsh{}\PYZsh{}}
+                     \PY{c+c1}{\PYZsh{}\PYZsh{} the column names set in the DictWriter object above.         \PYZsh{}\PYZsh{}}
+                     \PY{n}{duration1} \PY{o}{=} \PY{n}{duration\PYZus{}in\PYZus{}mins}\PY{p}{(}\PY{n}{row}\PY{p}{,} \PY{n}{city}\PY{p}{)}
+                     \PY{n}{month1}\PY{p}{,} \PY{n}{hours1}\PY{p}{,} \PY{n}{day\PYZus{}of\PYZus{}week1} \PY{o}{=} \PY{n}{time\PYZus{}of\PYZus{}trip}\PY{p}{(}\PY{n}{row}\PY{p}{,} \PY{n}{city}\PY{p}{)}
+                     \PY{n}{user\PYZus{}type1} \PY{o}{=} \PY{n}{type\PYZus{}of\PYZus{}user}\PY{p}{(}\PY{n}{row}\PY{p}{,} \PY{n}{city}\PY{p}{)}
+                     \PY{c+c1}{\PYZsh{}\PYZsh{} TODO: write the processed information to the output file.     \PYZsh{}\PYZsh{}}
+                     \PY{c+c1}{\PYZsh{}\PYZsh{} see https://docs.python.org/3/library/csv.html\PYZsh{}writer\PYZhy{}objects \PYZsh{}\PYZsh{}}
+                     \PY{n}{new\PYZus{}point} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{duration}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{duration1} \PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{month}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{n}{month1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hour}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{n}{hours1} \PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{day\PYZus{}of\PYZus{}week}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{n}{day\PYZus{}of\PYZus{}week1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{user\PYZus{}type1}\PY{p}{\PYZcb{}}
+                     \PY{n}{trip\PYZus{}writer}\PY{o}{.}\PY{n}{writerow}\PY{p}{(}\PY{n}{new\PYZus{}point}\PY{p}{)}
+                     
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{c+c1}{\PYZsh{} Run this cell to check your work}
+         \PY{n}{city\PYZus{}info} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Washington}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{in\PYZus{}file}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./data/Washington\PYZhy{}CapitalBikeshare\PYZhy{}2016.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                     \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{out\PYZus{}file}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./data/Washington\PYZhy{}2016\PYZhy{}Summary.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{,}
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Chicago}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{in\PYZus{}file}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./data/Chicago\PYZhy{}Divvy\PYZhy{}2016.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{out\PYZus{}file}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./data/Chicago\PYZhy{}2016\PYZhy{}Summary.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{,}
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NYC}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{in\PYZus{}file}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./data/NYC\PYZhy{}CitiBike\PYZhy{}2016.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{out\PYZus{}file}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./data/NYC\PYZhy{}2016\PYZhy{}Summary.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{\PYZcb{}}
+         
+         \PY{k}{for} \PY{n}{city}\PY{p}{,} \PY{n}{filenames} \PY{o+ow}{in} \PY{n}{city\PYZus{}info}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{condense\PYZus{}data}\PY{p}{(}\PY{n}{filenames}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{in\PYZus{}file}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{filenames}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{out\PYZus{}file}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{city}\PY{p}{)}
+             \PY{n}{print\PYZus{}first\PYZus{}point}\PY{p}{(}\PY{n}{filenames}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{out\PYZus{}file}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+City: Washington
+OrderedDict([('duration', '7.123116666666666'),
+             ('month', '3'),
+             ('hour', '22'),
+             ('day\_of\_week', 'Thursday'),
+             ('user\_type', 'Subscriber')])
+
+City: Chicago
+OrderedDict([('duration', '15.433333333333334'),
+             ('month', '3'),
+             ('hour', '23'),
+             ('day\_of\_week', 'Thursday'),
+             ('user\_type', 'Subscriber')])
+
+City: NYC
+OrderedDict([('duration', '13.983333333333333'),
+             ('month', '1'),
+             ('hour', '0'),
+             ('day\_of\_week', 'Friday'),
+             ('user\_type', 'Customer')])
+
+    \end{Verbatim}
+
+    \begin{quote}
+\textbf{Tip}: If you save a jupyter Notebook, the output from running
+code blocks will also be saved. However, the state of your workspace
+will be reset once a new session is started. Make sure that you run all
+of the necessary code blocks from your previous session to reestablish
+variables and functions before picking up where you last left off.
+\end{quote}
+
+ \#\# Exploratory Data Analysis
+
+Now that you have the data collected and wrangled, you're ready to start
+exploring the data. In this section you will write some code to compute
+descriptive statistics from the data. You will also be introduced to the
+\texttt{matplotlib} library to create some basic histograms of the data.
+
+ \#\#\# Statistics
+
+First, let's compute some basic counts. The first cell below contains a
+function that uses the csv module to iterate through a provided data
+file, returning the number of trips made by subscribers and customers.
+The second cell runs this function on the example Bay Area data in the
+\texttt{/examples/} folder. Modify the cells to answer the question
+below.
+
+\textbf{Question 4a}: Which city has the highest number of trips? Which
+city has the highest proportion of trips made by subscribers? Which city
+has the highest proportion of trips made by short-term customers?
+
+\textbf{Answer}: According to analysis, \textbf{NYC city} having highest
+subscribers, highest customers and highest trips
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{k}{def} \PY{n+nf}{number\PYZus{}of\PYZus{}trips}\PY{p}{(}\PY{n}{filename}\PY{p}{,}\PY{n}{city}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    This function reads in a file with trip data and reports the number of}
+         \PY{l+s+sd}{    trips made by subscribers, customers, and total overall.}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{filename}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f\PYZus{}in}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{} set up csv reader object}
+                 \PY{n}{reader} \PY{o}{=} \PY{n}{csv}\PY{o}{.}\PY{n}{DictReader}\PY{p}{(}\PY{n}{f\PYZus{}in}\PY{p}{)}
+                 
+                 \PY{c+c1}{\PYZsh{} initialize count variables}
+                 \PY{n}{n\PYZus{}subscribers} \PY{o}{=} \PY{l+m+mi}{0}
+                 \PY{n}{n\PYZus{}customers} \PY{o}{=} \PY{l+m+mi}{0}
+                 
+                 \PY{c+c1}{\PYZsh{} tally up ride types}
+                 \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n}{reader}\PY{p}{:}
+                     \PY{k}{if} \PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Subscriber}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                         \PY{n}{n\PYZus{}subscribers} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                     \PY{k}{else}\PY{p}{:}
+                         \PY{n}{n\PYZus{}customers} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                 
+                 \PY{c+c1}{\PYZsh{} compute total number of rides}
+                 \PY{n}{n\PYZus{}total} \PY{o}{=} \PY{n}{n\PYZus{}subscribers} \PY{o}{+} \PY{n}{n\PYZus{}customers}
+                 
+                 \PY{c+c1}{\PYZsh{} return tallies as a tuple}
+                 \PY{k}{return}\PY{p}{(}\PY{n}{n\PYZus{}subscribers}\PY{p}{,} \PY{n}{n\PYZus{}customers}\PY{p}{,} \PY{n}{n\PYZus{}total}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} Modify this and the previous cell to answer Question 4a. Remember to run \PYZsh{}\PYZsh{}}
+         \PY{c+c1}{\PYZsh{}\PYZsh{} the function on the cleaned data files you created from Question 3.      \PYZsh{}\PYZsh{}}
+         
+         \PY{c+c1}{\PYZsh{}data\PYZus{}file = \PYZsq{}./examples/BayArea\PYZhy{}Y3\PYZhy{}Summary.csv\PYZsq{}}
+         \PY{c+c1}{\PYZsh{}print(number\PYZus{}of\PYZus{}trips(data\PYZus{}file)) \PYZsh{}(5666, 633, 6299)}
+         
+         \PY{n}{city\PYZus{}files} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Washington}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./data/Washington\PYZhy{}2016\PYZhy{}Summary.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Chicago}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./data/Chicago\PYZhy{}2016\PYZhy{}Summary.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NYC}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./data/NYC\PYZhy{}2016\PYZhy{}Summary.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}
+         
+         \PY{n}{n\PYZus{}subscribers}\PY{p}{,} \PY{n}{n\PYZus{}customers}\PY{p}{,} \PY{n}{n\PYZus{}trips} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}
+         \PY{n}{highest\PYZus{}subscribers}\PY{p}{,} \PY{n}{highest\PYZus{}customers}\PY{p}{,} \PY{n}{highest\PYZus{}trips} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}
+         \PY{n}{highest\PYZus{}subscribers\PYZus{}city}\PY{p}{,} \PY{n}{highest\PYZus{}customers\PYZus{}city}\PY{p}{,} \PY{n}{highest\PYZus{}trips\PYZus{}city} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}
+         
+         \PY{k}{for} \PY{n}{city}\PY{p}{,}\PY{n}{filenames} \PY{o+ow}{in} \PY{n}{city\PYZus{}files}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{n\PYZus{}subscribers}\PY{p}{,} \PY{n}{n\PYZus{}customers}\PY{p}{,} \PY{n}{n\PYZus{}trips} \PY{o}{=} \PY{n}{number\PYZus{}of\PYZus{}trips}\PY{p}{(}\PY{n}{filenames}\PY{p}{,}\PY{n}{city}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{City : }\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{city}\PY{p}{)}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ || n\PYZus{}subscribers: }\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{n\PYZus{}subscribers}\PY{p}{)}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ n\PYZus{}customers: }\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{n\PYZus{}customers}\PY{p}{)}\PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ n\PYZus{}trips: }\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{n\PYZus{}trips}\PY{p}{)}\PY{p}{)}
+            
+             \PY{k}{if} \PY{p}{(}\PY{n}{highest\PYZus{}subscribers} \PY{o}{\PYZlt{}} \PY{n}{n\PYZus{}subscribers}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{highest\PYZus{}subscribers} \PY{o}{=} \PY{n}{n\PYZus{}subscribers}
+                 \PY{n}{highest\PYZus{}subscribers\PYZus{}city} \PY{o}{=} \PY{n}{city}
+                 
+             \PY{k}{if} \PY{p}{(}\PY{n}{highest\PYZus{}customers} \PY{o}{\PYZlt{}} \PY{n}{n\PYZus{}customers}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{highest\PYZus{}customers} \PY{o}{=} \PY{n}{n\PYZus{}customers}
+                 \PY{n}{highest\PYZus{}customers\PYZus{}city} \PY{o}{=} \PY{n}{city}
+                 
+             \PY{k}{if} \PY{p}{(}\PY{n}{highest\PYZus{}trips} \PY{o}{\PYZlt{}} \PY{n}{n\PYZus{}trips}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{highest\PYZus{}trips} \PY{o}{=} \PY{n}{n\PYZus{}trips}
+                 \PY{n}{highest\PYZus{}trips\PYZus{}city} \PY{o}{=} \PY{n}{city}
+         
+         
+         \PY{c+c1}{\PYZsh{}print(\PYZdq{}highest\PYZus{}subscribers: \PYZdq{}+str(highest\PYZus{}subscribers)+ \PYZdq{} City: \PYZdq{}+ str(highest\PYZus{}subscribers\PYZus{}city))}
+         \PY{c+c1}{\PYZsh{}print(\PYZdq{}highest\PYZus{}customers: \PYZdq{}+str(highest\PYZus{}customers)+\PYZdq{} City: \PYZdq{}+ str(highest\PYZus{}customers\PYZus{}city))}
+         \PY{c+c1}{\PYZsh{}print(\PYZdq{}highest\PYZus{}trips: \PYZdq{}+str(highest\PYZus{}trips)+ \PYZdq{} City: \PYZdq{}+ str(highest\PYZus{}trips\PYZus{}city))}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+City : Washington || n\_subscribers: 51753 n\_customers: 14573 n\_trips: 66326
+City : Chicago || n\_subscribers: 54982 n\_customers: 17149 n\_trips: 72131
+City : NYC || n\_subscribers: 245896 n\_customers: 30902 n\_trips: 276798
+highest\_subscribers: 245896 City: NYC
+highest\_customers: 30902 City: NYC
+highest\_trips: 276798 City: NYC
+
+    \end{Verbatim}
+
+    \begin{quote}
+\textbf{Tip}: In order to add additional cells to a notebook, you can
+use the ``Insert Cell Above'' and ``Insert Cell Below'' options from the
+menu bar above. There is also an icon in the toolbar for adding new
+cells, with additional icons for moving the cells up and down the
+document. By default, new cells are of the code type; you can also
+specify the cell type (e.g.~Code or Markdown) of selected cells from the
+Cell menu or the dropdown in the toolbar.
+\end{quote}
+
+Now, you will write your own code to continue investigating properties
+of the data.
+
+\textbf{Question 4b}: Bike-share systems are designed for riders to take
+short trips. Most of the time, users are allowed to take trips of 30
+minutes or less with no additional charges, with overage charges made
+for trips of longer than that duration. What is the average trip length
+for each city? What proportion of rides made in each city are longer
+than 30 minutes?
+
+\textbf{Answer}: \textbf{Washington} having avg\_trip\_length:
+\textbf{14} pro\_of\_overchages: \textbf{8.0} \textbar{}\textbar{}
+\textbf{Chicago} having avg\_trip\_length: \textbf{14}
+pro\_of\_overchages: \textbf{6.9} \textbar{}\textbar{} \textbf{NYC}
+having avg\_trip\_length: \textbf{13} pro\_of\_overchages: \textbf{6.6}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{k}{def} \PY{n+nf}{avg\PYZus{}length\PYZus{}pro\PYZus{}of\PYZus{}overchages}\PY{p}{(}\PY{n}{filename}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    This function reads in a file with trip data and reports the number of}
+         \PY{l+s+sd}{    trips made by subscribers, customers, and total overall.}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{filename}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f\PYZus{}in}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{} set up csv reader object}
+                 \PY{n}{reader} \PY{o}{=} \PY{n}{csv}\PY{o}{.}\PY{n}{DictReader}\PY{p}{(}\PY{n}{f\PYZus{}in}\PY{p}{)}
+                 
+                 \PY{c+c1}{\PYZsh{} initialize count variables}
+                 \PY{n}{total\PYZus{}trip\PYZus{}length} \PY{o}{=} \PY{l+m+mi}{0}
+                 \PY{n}{pro\PYZus{}of\PYZus{}overchages} \PY{o}{=} \PY{l+m+mi}{0}
+                 \PY{n}{n\PYZus{}trips} \PY{o}{=} \PY{l+m+mi}{0}
+                 
+                 \PY{c+c1}{\PYZsh{} tally up duration details}
+                 \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n}{reader}\PY{p}{:}
+                     \PY{n}{n\PYZus{}trips} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                     \PY{n}{total\PYZus{}trip\PYZus{}length}  \PY{o}{+}\PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{duration}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                     \PY{k}{if} \PY{p}{(}\PY{n+nb}{float}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{duration}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{30}\PY{p}{)}\PY{p}{:}
+                         \PY{n}{pro\PYZus{}of\PYZus{}overchages} \PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+                 
+                 \PY{c+c1}{\PYZsh{} average trip length}
+                 \PY{n}{avg\PYZus{}trip\PYZus{}length} \PY{o}{=} \PY{n}{total\PYZus{}trip\PYZus{}length} \PY{o}{/} \PY{n}{n\PYZus{}trips}
+                 
+                 \PY{c+c1}{\PYZsh{} proportion of rides made in each city are longer than 30 minutes}
+                 \PY{n}{pro\PYZus{}of\PYZus{}overchages} \PY{o}{=} \PY{p}{(}\PY{n}{pro\PYZus{}of\PYZus{}overchages} \PY{o}{*} \PY{l+m+mi}{100}\PY{p}{)} \PY{o}{/} \PY{n}{n\PYZus{}trips}
+                 
+                 \PY{c+c1}{\PYZsh{} return total\PYZus{}trip\PYZus{}length and pro\PYZus{}of\PYZus{}overchages as a tuple}
+                 \PY{k}{return}\PY{p}{(}\PY{n}{avg\PYZus{}trip\PYZus{}length}\PY{p}{,} \PY{n}{pro\PYZus{}of\PYZus{}overchages}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} Use this and additional cells to answer Question 4b.                 \PYZsh{}\PYZsh{}}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}                                                                      \PYZsh{}\PYZsh{}}
+         \PY{c+c1}{\PYZsh{}\PYZsh{} HINT: The csv module reads in all of the data as strings, including  \PYZsh{}\PYZsh{}}
+         \PY{c+c1}{\PYZsh{}\PYZsh{} numeric values. You will need a function to convert the strings      \PYZsh{}\PYZsh{}}
+         \PY{c+c1}{\PYZsh{}\PYZsh{} into an appropriate numeric type before you aggregate data.          \PYZsh{}\PYZsh{}}
+         \PY{c+c1}{\PYZsh{}\PYZsh{} TIP: For the Bay Area example, the average trip length is 14 minutes \PYZsh{}\PYZsh{}}
+         \PY{c+c1}{\PYZsh{}\PYZsh{} and 3.5\PYZpc{} of trips are longer than 30 minutes.}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}}
+         \PY{c+c1}{\PYZsh{}data\PYZus{}file = \PYZsq{}./examples/BayArea\PYZhy{}Y3\PYZhy{}Summary.csv\PYZsq{}}
+         \PY{c+c1}{\PYZsh{}avg\PYZus{}trip\PYZus{}length, pro\PYZus{}of\PYZus{}overchages = avg\PYZus{}length\PYZus{}pro\PYZus{}of\PYZus{}overchages(data\PYZus{}file)}
+         \PY{c+c1}{\PYZsh{}print(\PYZsq{}total\PYZus{}trip\PYZus{}length: \PYZsq{}+str(int(avg\PYZus{}trip\PYZus{}length))+ \PYZsq{} pro\PYZus{}of\PYZus{}overchages: \PYZsq{}+str(format(pro\PYZus{}of\PYZus{}overchages, \PYZsq{}.1f\PYZsq{})) )}
+         
+         \PY{n}{city\PYZus{}files} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Washington}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./data/Washington\PYZhy{}2016\PYZhy{}Summary.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Chicago}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./data/Chicago\PYZhy{}2016\PYZhy{}Summary.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NYC}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./data/NYC\PYZhy{}2016\PYZhy{}Summary.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}
+         
+         \PY{n}{total\PYZus{}trip\PYZus{}length}\PY{p}{,} \PY{n}{pro\PYZus{}of\PYZus{}overchages} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}
+         
+         \PY{k}{for} \PY{n}{city}\PY{p}{,}\PY{n}{filenames} \PY{o+ow}{in} \PY{n}{city\PYZus{}files}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{avg\PYZus{}trip\PYZus{}length}\PY{p}{,} \PY{n}{pro\PYZus{}of\PYZus{}overchages} \PY{o}{=} \PY{n}{avg\PYZus{}length\PYZus{}pro\PYZus{}of\PYZus{}overchages}\PY{p}{(}\PY{n}{filenames}\PY{p}{)}
+             \PY{n}{avg\PYZus{}trip\PYZus{}length}\PY{p}{,} \PY{n}{pro\PYZus{}of\PYZus{}overchages} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{avg\PYZus{}trip\PYZus{}length}\PY{p}{)}\PY{p}{,} \PY{n+nb}{format}\PY{p}{(}\PY{n}{pro\PYZus{}of\PYZus{}overchages}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.1f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}print(str(city)+\PYZsq{} having avg\PYZus{}trip\PYZus{}length: \PYZsq{}+str(avg\PYZus{}trip\PYZus{}length)+ \PYZsq{} pro\PYZus{}of\PYZus{}overchages: \PYZsq{}+pro\PYZus{}of\PYZus{}overchages)}
+\end{Verbatim}
+
+
+    \textbf{Question 4c}: Dig deeper into the question of trip duration
+based on ridership. Choose one city. Within that city, which type of
+user takes longer rides on average: Subscribers or Customers?
+
+\textbf{Answer}: In \textbf{NYC city} \textbf{Customers} takes longer
+rides on average
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k}{def} \PY{n+nf}{find\PYZus{}longer\PYZus{}rides\PYZus{}type\PYZus{}user}\PY{p}{(}\PY{n}{filename}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{}print(city)}
+            \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{filename}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f\PYZus{}in}\PY{p}{:}
+                \PY{n}{reader} \PY{o}{=} \PY{n}{csv}\PY{o}{.}\PY{n}{DictReader}\PY{p}{(}\PY{n}{f\PYZus{}in}\PY{p}{)}
+                \PY{n}{Subscribers} \PY{o}{=} \PY{l+m+mi}{0}
+                \PY{n}{Customers} \PY{o}{=} \PY{l+m+mi}{0}
+                \PY{n}{total\PYZus{}duration\PYZus{}s} \PY{o}{=} \PY{l+m+mi}{0}
+                \PY{n}{total\PYZus{}duration\PYZus{}c} \PY{o}{=} \PY{l+m+mi}{0}
+                \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n}{reader}\PY{p}{:}
+                    \PY{k}{if} \PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Subscriber}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                        \PY{n}{Subscribers} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                        \PY{n}{total\PYZus{}duration\PYZus{}s} \PY{o}{+}\PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{duration}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                    \PY{k}{if} \PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Customer}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                        \PY{n}{Customers} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                        \PY{n}{total\PYZus{}duration\PYZus{}c} \PY{o}{+}\PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{duration}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                
+                \PY{n}{avg\PYZus{}long\PYZus{}rides\PYZus{}Subscriber} \PY{o}{=}  \PY{n}{total\PYZus{}duration\PYZus{}s} \PY{o}{/} \PY{n}{Subscribers}
+                \PY{n}{avg\PYZus{}long\PYZus{}rides\PYZus{}Customers} \PY{o}{=}  \PY{n}{total\PYZus{}duration\PYZus{}c} \PY{o}{/} \PY{n}{Customers}
+                \PY{n+nb}{print}\PY{p}{(}\PY{n}{avg\PYZus{}long\PYZus{}rides\PYZus{}Subscriber}\PY{p}{)}
+                \PY{n+nb}{print}\PY{p}{(}\PY{n}{avg\PYZus{}long\PYZus{}rides\PYZus{}Customers}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{}return avg\PYZus{}long\PYZus{}rides\PYZus{}Subscriber, avg\PYZus{}long\PYZus{}rides\PYZus{}Customers}
+            \PY{k}{return} \PY{n+nb}{format}\PY{p}{(}\PY{n}{avg\PYZus{}long\PYZus{}rides\PYZus{}Subscriber}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.1f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n+nb}{format}\PY{p}{(}\PY{n}{avg\PYZus{}long\PYZus{}rides\PYZus{}Customers}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.1f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} Use this and additional cells to answer Question 4c. If you have    \PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} not done so yet, consider revising some of your previous code to    \PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} make use of functions for reusability.                              \PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}                                                                     \PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} TIP: For the Bay Area example data, you should find the average     \PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} Subscriber trip duration to be 9.5 minutes and the average Customer \PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} trip duration to be 54.6 minutes. Do the other cities have this     \PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} level of difference?                                                \PYZsh{}\PYZsh{}}
+        
+        \PY{c+c1}{\PYZsh{}data\PYZus{}file = \PYZsq{}./examples/BayArea\PYZhy{}Y3\PYZhy{}Summary.csv\PYZsq{}}
+        \PY{c+c1}{\PYZsh{}print(find\PYZus{}longer\PYZus{}rides\PYZus{}type\PYZus{}user(data\PYZus{}file))}
+        
+        
+        \PY{c+c1}{\PYZsh{} as mentioned in let\PYZsq{}s choose any one city i.e. NY}
+        \PY{n}{data\PYZus{}file\PYZus{}NYC} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NYC}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./data/NYC\PYZhy{}2016\PYZhy{}Summary.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}
+        
+        \PY{n}{avg\PYZus{}long\PYZus{}rides\PYZus{}Subscriber}\PY{p}{,} \PY{n}{avg\PYZus{}long\PYZus{}rides\PYZus{}Customers} \PY{o}{=}  \PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mf}{0.0}
+        
+        \PY{n}{avg\PYZus{}long\PYZus{}rides\PYZus{}Subscriber}\PY{p}{,} \PY{n}{avg\PYZus{}long\PYZus{}rides\PYZus{}Customers} \PY{o}{=} \PY{n}{find\PYZus{}longer\PYZus{}rides\PYZus{}type\PYZus{}user}\PY{p}{(}\PY{n}{data\PYZus{}file\PYZus{}NYC}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NYC}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NYC:: avg\PYZus{}long\PYZus{}rides\PYZus{}Subscriber: }\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{avg\PYZus{}long\PYZus{}rides\PYZus{}Subscriber}\PY{p}{)}\PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ avg\PYZus{}long\PYZus{}rides\PYZus{}Customers: }\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{avg\PYZus{}long\PYZus{}rides\PYZus{}Customers}\PY{p}{)}\PY{p}{)}
+        
+        \PY{k}{if} \PY{p}{(}\PY{n}{avg\PYZus{}long\PYZus{}rides\PYZus{}Subscriber} \PY{o}{\PYZgt{}} \PY{n}{avg\PYZus{}long\PYZus{}rides\PYZus{}Customers}\PY{p}{)}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Subscriber takes longer rides on average}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{k}{else}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Customers takes longer rides on average}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}   
+        
+        \PY{c+c1}{\PYZsh{}TESTED FOR ALL OTHER CITIES}
+        
+        \PY{c+c1}{\PYZsh{}city\PYZus{}files = \PYZob{}\PYZsq{}Washington\PYZsq{}: \PYZsq{}./data/Washington\PYZhy{}2016\PYZhy{}Summary.csv\PYZsq{},}
+                     \PY{c+c1}{\PYZsh{}\PYZsq{}Chicago\PYZsq{}: \PYZsq{}./data/Chicago\PYZhy{}2016\PYZhy{}Summary.csv\PYZsq{},}
+                     \PY{c+c1}{\PYZsh{}\PYZsq{}NYC\PYZsq{}: \PYZsq{}./data/NYC\PYZhy{}2016\PYZhy{}Summary.csv\PYZsq{}\PYZcb{}}
+        
+        \PY{c+c1}{\PYZsh{}avg\PYZus{}long\PYZus{}rides\PYZus{}Subscriber, avg\PYZus{}long\PYZus{}rides\PYZus{}Customers =  0, 0 }
+        
+        \PY{c+c1}{\PYZsh{}for city,filenames in city\PYZus{}files.items():}
+            \PY{c+c1}{\PYZsh{}avg\PYZus{}long\PYZus{}rides\PYZus{}Subscriber, avg\PYZus{}long\PYZus{}rides\PYZus{}Customers = find\PYZus{}longer\PYZus{}rides\PYZus{}type\PYZus{}user(filenames)}
+            \PY{c+c1}{\PYZsh{}print(str(city) +\PYZsq{}:: avg\PYZus{}long\PYZus{}rides\PYZus{}Subscriber: \PYZsq{}+str(avg\PYZus{}long\PYZus{}rides\PYZus{}Subscriber)+ \PYZsq{} avg\PYZus{}long\PYZus{}rides\PYZus{}Customers: \PYZsq{}+str(avg\PYZus{}long\PYZus{}rides\PYZus{}Customers))}
+            \PY{c+c1}{\PYZsh{}if (avg\PYZus{}long\PYZus{}rides\PYZus{}Subscriber \PYZgt{} avg\PYZus{}long\PYZus{}rides\PYZus{}Customers):}
+                \PY{c+c1}{\PYZsh{}print(\PYZdq{}Subscriber takes longer rides on average\PYZdq{})}
+            \PY{c+c1}{\PYZsh{}else:}
+                \PY{c+c1}{\PYZsh{}print(\PYZdq{}Customers takes longer rides on average\PYZdq{})}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+12.206264708115235
+21.49881729335759
+NYC:: avg\_long\_rides\_Subscriber: 12.2 avg\_long\_rides\_Customers: 21.5
+Customers takes longer rides on average
+
+    \end{Verbatim}
+
+     \#\#\# Visualizations
+
+The last set of values that you computed should have pulled up an
+interesting result. While the mean trip time for Subscribers is well
+under 30 minutes, the mean trip time for Customers is actually
+\emph{above} 30 minutes! It will be interesting for us to look at how
+the trip times are distributed. In order to do this, a new library will
+be introduced here, \texttt{matplotlib}. Run the cell below to load the
+library and to generate an example plot.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} load library}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        
+        \PY{c+c1}{\PYZsh{} this is a \PYZsq{}magic word\PYZsq{} that allows for plots to be displayed}
+        \PY{c+c1}{\PYZsh{} inline with the notebook. If you want to know more, see:}
+        \PY{c+c1}{\PYZsh{} http://ipython.readthedocs.io/en/stable/interactive/magics.html}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline 
+        
+        \PY{c+c1}{\PYZsh{} example histogram, data taken from bay area sample}
+        \PY{n}{data} \PY{o}{=} \PY{p}{[} \PY{l+m+mf}{7.65}\PY{p}{,}  \PY{l+m+mf}{8.92}\PY{p}{,}  \PY{l+m+mf}{7.42}\PY{p}{,}  \PY{l+m+mf}{5.50}\PY{p}{,} \PY{l+m+mf}{16.17}\PY{p}{,}  \PY{l+m+mf}{4.20}\PY{p}{,}  \PY{l+m+mf}{8.98}\PY{p}{,}  \PY{l+m+mf}{9.62}\PY{p}{,} \PY{l+m+mf}{11.48}\PY{p}{,} \PY{l+m+mf}{14.33}\PY{p}{,}
+                \PY{l+m+mf}{19.02}\PY{p}{,} \PY{l+m+mf}{21.53}\PY{p}{,}  \PY{l+m+mf}{3.90}\PY{p}{,}  \PY{l+m+mf}{7.97}\PY{p}{,}  \PY{l+m+mf}{2.62}\PY{p}{,}  \PY{l+m+mf}{2.67}\PY{p}{,}  \PY{l+m+mf}{3.08}\PY{p}{,} \PY{l+m+mf}{14.40}\PY{p}{,} \PY{l+m+mf}{12.90}\PY{p}{,}  \PY{l+m+mf}{7.83}\PY{p}{,}
+                \PY{l+m+mf}{25.12}\PY{p}{,}  \PY{l+m+mf}{8.30}\PY{p}{,}  \PY{l+m+mf}{4.93}\PY{p}{,} \PY{l+m+mf}{12.43}\PY{p}{,} \PY{l+m+mf}{10.60}\PY{p}{,}  \PY{l+m+mf}{6.17}\PY{p}{,} \PY{l+m+mf}{10.88}\PY{p}{,}  \PY{l+m+mf}{4.78}\PY{p}{,} \PY{l+m+mf}{15.15}\PY{p}{,}  \PY{l+m+mf}{3.53}\PY{p}{,}
+                 \PY{l+m+mf}{9.43}\PY{p}{,} \PY{l+m+mf}{13.32}\PY{p}{,} \PY{l+m+mf}{11.72}\PY{p}{,}  \PY{l+m+mf}{9.85}\PY{p}{,}  \PY{l+m+mf}{5.22}\PY{p}{,} \PY{l+m+mf}{15.10}\PY{p}{,}  \PY{l+m+mf}{3.95}\PY{p}{,}  \PY{l+m+mf}{3.17}\PY{p}{,}  \PY{l+m+mf}{8.78}\PY{p}{,}  \PY{l+m+mf}{1.88}\PY{p}{,}
+                 \PY{l+m+mf}{4.55}\PY{p}{,} \PY{l+m+mf}{12.68}\PY{p}{,} \PY{l+m+mf}{12.38}\PY{p}{,}  \PY{l+m+mf}{9.78}\PY{p}{,}  \PY{l+m+mf}{7.63}\PY{p}{,}  \PY{l+m+mf}{6.45}\PY{p}{,} \PY{l+m+mf}{17.38}\PY{p}{,} \PY{l+m+mf}{11.90}\PY{p}{,} \PY{l+m+mf}{11.52}\PY{p}{,}  \PY{l+m+mf}{8.63}\PY{p}{,}\PY{p}{]}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distribution of Trip Durations}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Duration (m)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_21_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    In the above cell, we collected fifty trip times in a list, and passed
+this list as the first argument to the \texttt{.hist()} function. This
+function performs the computations and creates plotting objects for
+generating a histogram, but the plot is actually not rendered until the
+\texttt{.show()} function is executed. The \texttt{.title()} and
+\texttt{.xlabel()} functions provide some labeling for plot context.
+
+You will now use these functions to create a histogram of the trip times
+for the city you selected in question 4c. Don't separate the Subscribers
+and Customers for now: just collect all of the trip times and plot them.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k}{def} \PY{n+nf}{collect\PYZus{}trip\PYZus{}time}\PY{p}{(}\PY{n}{filename}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    functions to create a list of the trip times for the city that is selected in question 4c. (i.e NYC)}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            
+            \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{filename}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f\PYZus{}in}\PY{p}{:}
+                
+                \PY{n}{reader} \PY{o}{=} \PY{n}{csv}\PY{o}{.}\PY{n}{DictReader}\PY{p}{(}\PY{n}{f\PYZus{}in}\PY{p}{)}
+                
+                \PY{n}{trip\PYZus{}time} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n}{reader}\PY{p}{:}
+                    \PY{n}{get\PYZus{}value} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{duration}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                    \PY{n}{getvalue} \PY{o}{=} \PY{n+nb}{format}\PY{p}{(}\PY{n}{get\PYZus{}value}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.2f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                    \PY{n}{trip\PYZus{}time}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{getvalue}\PY{p}{)}
+                    
+            \PY{k}{return} \PY{n}{trip\PYZus{}time}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} Use this and additional cells to collect all of the trip times as a list \PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} and then use pyplot functions to generate a histogram of trip times.     \PYZsh{}\PYZsh{}}
+        
+        \PY{c+c1}{\PYZsh{} load library}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        
+        \PY{c+c1}{\PYZsh{} this is a \PYZsq{}magic word\PYZsq{} that allows for plots to be displayed}
+        \PY{c+c1}{\PYZsh{} inline with the notebook. If you want to know more, see:}
+        \PY{c+c1}{\PYZsh{} http://ipython.readthedocs.io/en/stable/interactive/magics.html}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline 
+        
+        \PY{c+c1}{\PYZsh{} as mentioned in let\PYZsq{}s choose any one city i.e. NYC}
+        \PY{n}{data\PYZus{}file} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NYC}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./data/NYC\PYZhy{}2016\PYZhy{}Summary.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}
+        
+        \PY{c+c1}{\PYZsh{} example histogram, data taken from bay area sample}
+        \PY{n}{data} \PY{o}{=} \PY{n}{collect\PYZus{}trip\PYZus{}time}\PY{p}{(}\PY{n}{data\PYZus{}file}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NYC}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distribution of Trip Durations}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Duration (m)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_24_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    If you followed the use of the \texttt{.hist()} and \texttt{.show()}
+functions exactly like in the example, you're probably looking at a plot
+that's completely unexpected. The plot consists of one extremely tall
+bar on the left, maybe a very short second bar, and a whole lot of empty
+space in the center and right. Take a look at the duration values on the
+x-axis. This suggests that there are some highly infrequent outliers in
+the data. Instead of reprocessing the data, you will use additional
+parameters with the \texttt{.hist()} function to limit the range of data
+that is plotted. Documentation for the function can be found
+\href{https://matplotlib.org/devdocs/api/_as_gen/matplotlib.pyplot.hist.html\#matplotlib.pyplot.hist}{{[}here{]}}.
+
+\textbf{Question 5}: Use the parameters of the \texttt{.hist()} function
+to plot the distribution of trip times for the Subscribers in your
+selected city. Do the same thing for only the Customers. Add limits to
+the plots so that only trips of duration less than 75 minutes are
+plotted. As a bonus, set the plots up so that bars are in five-minute
+wide intervals. For each group, where is the peak of each distribution?
+How would you describe the shape of each distribution?
+
+\textbf{Answer}: In case of \textbf{Subscribers}, duration between
+\textbf{5-10} having peak distribution. In case of \textbf{Customers},
+duration between \textbf{20-25} having peak distribution.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k}{def} \PY{n+nf}{collect\PYZus{}trip\PYZus{}time\PYZus{}modified}\PY{p}{(}\PY{n}{filename}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    functions to list  of the trip times less than 75 minutes for the city that is selected in question 4c. (i.e NYC)}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{filename}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f\PYZus{}in}\PY{p}{:}
+                
+                \PY{n}{reader} \PY{o}{=} \PY{n}{csv}\PY{o}{.}\PY{n}{DictReader}\PY{p}{(}\PY{n}{f\PYZus{}in}\PY{p}{)}
+                \PY{n}{subscriber\PYZus{}trip\PYZus{}time} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{n}{customer\PYZus{}trip\PYZus{}time} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                
+                \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n}{reader}\PY{p}{:}
+                    \PY{n}{get\PYZus{}value} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{duration}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                    \PY{n}{getvalue} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{get\PYZus{}value}\PY{p}{)}
+                    \PY{k}{if}\PY{p}{(}\PY{n+nb}{float}\PY{p}{(}\PY{n}{getvalue}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{l+m+mi}{75}\PY{p}{)}\PY{p}{:}
+                        \PY{k}{if} \PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Subscriber}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                            \PY{n}{subscriber\PYZus{}trip\PYZus{}time}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{getvalue}\PY{p}{)}\PY{p}{)}
+                        \PY{k}{if} \PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Customer}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                            \PY{n}{customer\PYZus{}trip\PYZus{}time}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{getvalue}\PY{p}{)}\PY{p}{)}
+                    
+            \PY{k}{return} \PY{n}{subscriber\PYZus{}trip\PYZus{}time}\PY{p}{,} \PY{n}{customer\PYZus{}trip\PYZus{}time}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} Use this and additional cells to answer Question 5. \PYZsh{}\PYZsh{}}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline 
+        
+        \PY{c+c1}{\PYZsh{} as mentioned in let\PYZsq{}s choose any one city i.e. NYC}
+        \PY{n}{data\PYZus{}file} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NYC}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./data/NYC\PYZhy{}2016\PYZhy{}Summary.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}
+        
+        \PY{c+c1}{\PYZsh{} example histogram, data taken from bay area sample}
+        \PY{n}{subscriber\PYZus{}trip\PYZus{}time}\PY{p}{,} \PY{n}{customer\PYZus{}trip\PYZus{}time} \PY{o}{=} \PY{n}{collect\PYZus{}trip\PYZus{}time\PYZus{}modified}\PY{p}{(}\PY{n}{data\PYZus{}file}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NYC}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}ans = (max(subscriber\PYZus{}trip\PYZus{}time) \PYZhy{} min(subscriber\PYZus{}trip\PYZus{}time))}
+        \PY{n}{intervals} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{25}\PY{p}{,}\PY{l+m+mi}{30}\PY{p}{,}\PY{l+m+mi}{35}\PY{p}{,}\PY{l+m+mi}{40}\PY{p}{,}\PY{l+m+mi}{45}\PY{p}{,}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{55}\PY{p}{,}\PY{l+m+mi}{60}\PY{p}{]}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{subscriber\PYZus{}trip\PYZus{}time}\PY{p}{,} \PY{n}{bins} \PY{o}{=} \PY{n}{intervals}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Trip times for Subscribers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} 
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Duration}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{intervals}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{intervals} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{25}\PY{p}{,}\PY{l+m+mi}{30}\PY{p}{,}\PY{l+m+mi}{35}\PY{p}{,}\PY{l+m+mi}{40}\PY{p}{,}\PY{l+m+mi}{45}\PY{p}{,}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{55}\PY{p}{,}\PY{l+m+mi}{60}\PY{p}{]}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{customer\PYZus{}trip\PYZus{}time}\PY{p}{,} \PY{n}{bins} \PY{o}{=} \PY{n}{intervals}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Trip times for Customers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} 
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Duration}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{intervals}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+     \#\# Performing Your Own Analysis
+
+So far, you've performed an initial exploration into the data available.
+You have compared the relative volume of trips made between three U.S.
+cities and the ratio of trips made by Subscribers and Customers. For one
+of these cities, you have investigated differences between Subscribers
+and Customers in terms of how long a typical trip lasts. Now it is your
+turn to continue the exploration in a direction that you choose. Here
+are a few suggestions for questions to explore:
+
+\begin{itemize}
+\tightlist
+\item
+  How does ridership differ by month or season? Which month / season has
+  the highest ridership? Does the ratio of Subscriber trips to Customer
+  trips change depending on the month or season?
+\item
+  Is the pattern of ridership different on the weekends versus weekdays?
+  On what days are Subscribers most likely to use the system? What about
+  Customers? Does the average duration of rides change depending on the
+  day of the week?
+\item
+  During what time of day is the system used the most? Is there a
+  difference in usage patterns for Subscribers and Customers?
+\end{itemize}
+
+If any of the questions you posed in your answer to question 1 align
+with the bullet points above, this is a good opportunity to investigate
+one of them. As part of your investigation, you will need to create a
+visualization. If you want to create something other than a histogram,
+then you might want to consult the
+\href{https://matplotlib.org/devdocs/api/pyplot_summary.html}{Pyplot
+documentation}. In particular, if you are plotting values across a
+categorical variable (e.g.~city, user type), a bar chart will be useful.
+The
+\href{https://matplotlib.org/devdocs/api/_as_gen/matplotlib.pyplot.bar.html\#matplotlib.pyplot.bar}{documentation
+page for \texttt{.bar()}} includes links at the bottom of the page with
+examples for you to build off of for your own use.
+
+\textbf{Question 6}: Continue the investigation by exploring another
+question that could be answered by the data available. Document the
+question you want to explore below. Your investigation should involve at
+least two variables and should compare at least two groups. You should
+also use at least one visualization as part of your explorations.
+
+\textbf{Answer}: After performing analysis on months, I can see that
+\textbf{between Nov-Dec} people used service most. Moreover, specific to
+each user, \textbf{Subscriber} used most \textbf{between Nov-Dec} and
+\textbf{Customers} used most \textbf{between Sept-Oct}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{k}{def} \PY{n+nf}{get\PYZus{}month\PYZus{}list}\PY{p}{(}\PY{n}{filename}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    functions which will return months list data the city NYC}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{filename}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f\PYZus{}in}\PY{p}{:}
+                 
+                 \PY{n}{reader} \PY{o}{=} \PY{n}{csv}\PY{o}{.}\PY{n}{DictReader}\PY{p}{(}\PY{n}{f\PYZus{}in}\PY{p}{)}
+                 \PY{n}{tot\PYZus{}month\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                 \PY{n}{subscribers\PYZus{}month\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                 \PY{n}{customers\PYZus{}month\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                 
+                 \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n}{reader}\PY{p}{:}
+                     \PY{n}{getvalue} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{month}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                     \PY{n}{tot\PYZus{}month\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{getvalue}\PY{p}{)}
+                     \PY{k}{if} \PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Subscriber}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                         \PY{n}{subscribers\PYZus{}month\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{getvalue}\PY{p}{)}
+                     \PY{k}{if} \PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{user\PYZus{}type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Customer}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                         \PY{n}{customers\PYZus{}month\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{getvalue}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{tot\PYZus{}month\PYZus{}list}\PY{p}{,} \PY{n}{subscribers\PYZus{}month\PYZus{}list}\PY{p}{,} \PY{n}{customers\PYZus{}month\PYZus{}list}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} Which month has the highest ridership?                       \PYZsh{}\PYZsh{}}
+         \PY{c+c1}{\PYZsh{}\PYZsh{} Does the ratio of Subscriber trips to Customer trips change  \PYZsh{}\PYZsh{}}
+         \PY{c+c1}{\PYZsh{}\PYZsh{} depending on the month?                                      \PYZsh{}\PYZsh{}}
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{} Use this and additional cells to answer Question 5. \PYZsh{}\PYZsh{}}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{import} \PY{n+nn}{csv}
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline 
+         
+         \PY{c+c1}{\PYZsh{} as mentioned in let\PYZsq{}s choose any one city i.e. NYC}
+         \PY{n}{data\PYZus{}file} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NYC}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./data/NYC\PYZhy{}2016\PYZhy{}Summary.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}
+         
+         \PY{n}{tot\PYZus{}month\PYZus{}list}\PY{p}{,} \PY{n}{subscribers\PYZus{}month\PYZus{}list}\PY{p}{,} \PY{n}{customers\PYZus{}month\PYZus{}list} \PY{o}{=} \PY{n}{get\PYZus{}month\PYZus{}list}\PY{p}{(}\PY{n}{data\PYZus{}file}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NYC}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{intervals} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{11}\PY{p}{,}\PY{l+m+mi}{12}\PY{p}{]}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{tot\PYZus{}month\PYZus{}list}\PY{p}{,} \PY{n}{bins} \PY{o}{=} \PY{n}{intervals}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tot\PYZus{}month\PYZus{}list}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} 
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Month Number}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{intervals}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_31_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{subscribers\PYZus{}month\PYZus{}list}\PY{p}{,} \PY{n}{bins} \PY{o}{=} \PY{n}{intervals}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{subscribers\PYZus{}month\PYZus{}list}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Month Number}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{intervals}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_32_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{customers\PYZus{}month\PYZus{}list}\PY{p}{,} \PY{n}{bins} \PY{o}{=} \PY{n}{intervals}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{customers\PYZus{}month\PYZus{}list}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} 
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Month Number}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{intervals}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_33_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+     \#\# Conclusions
+
+Congratulations on completing the project! This is only a sampling of
+the data analysis process: from generating questions, wrangling the
+data, and to exploring the data. Normally, at this point in the data
+analysis process, you might want to draw conclusions about the data by
+performing a statistical test or fitting the data to a model for making
+predictions. There are also a lot of potential analyses that could be
+performed on the data which are not possible with only the data
+provided. For example, detailed location data has not been investigated.
+Where are the most commonly used docks? What are the most common routes?
+As another example, weather has potential to have a large impact on
+daily ridership. How much is ridership impacted when there is rain or
+snow? Are subscribers or customers affected more by changes in weather?
+
+\textbf{Question 7}: Putting the bike share data aside, think of a topic
+or field of interest where you would like to be able to apply the
+techniques of data science. What would you like to be able to learn from
+your chosen subject?
+
+\textbf{Answer}: From large amount of record, we can analyze that how
+many Android developers, IOS developers, web techenology developers,
+Machine learning developers or other develpers are available. From this
+analysis we can predict that, in which field there is very less
+develpers and which developer will in demand most in upcoming future.
+
+\begin{quote}
+\textbf{Tip}: If we want to share the results of our analysis with
+others, we aren't limited to giving them a copy of the jupyter Notebook
+(.ipynb) file. We can also export the Notebook output in a form that can
+be opened even for those without Python installed. From the
+\textbf{File} menu in the upper left, go to the \textbf{Download as}
+submenu. You can then choose a different format that can be viewed more
+generally, such as HTML (.html) or PDF (.pdf). You may need additional
+packages or software to perform these exports.
+\end{quote}
+
+\begin{quote}
+If you are working on this project via the Project Notebook page in the
+classroom, you can also submit this project directly from the workspace.
+\textbf{Before you do that}, you should save an HTML copy of the
+completed project to the workspace by running the code cell below. If it
+worked correctly, the output code should be a 0, and if you click on the
+jupyter icon in the upper left, you should see your .html document in
+the workspace directory. Alternatively, you can download the .html copy
+of your report following the steps in the previous paragraph, then
+\emph{upload} the report to the directory (by clicking the jupyter
+icon).
+\end{quote}
+
+\begin{quote}
+Either way, once you've gotten the .html report in your workspace, you
+can complete your submission by clicking on the ``Submit Project''
+button to the lower-right hand side of the workspace.
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{from} \PY{n+nn}{subprocess} \PY{k}{import} \PY{n}{call}
+        \PY{n}{call}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{python}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}m}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nbconvert}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Bike\PYZus{}Share\PYZus{}Analysis.ipynb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
